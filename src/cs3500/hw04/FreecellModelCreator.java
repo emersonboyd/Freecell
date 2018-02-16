@@ -30,6 +30,9 @@ public class FreecellModelCreator {
     throw new IllegalArgumentException(ERROR_ILLEGAL_GAMETYPE);
   }
 
+  /**
+   * Represents a type of game that can be created by the factory class.
+   */
   public enum GameType {
     SINGLEMOVE,
     MULTIMOVE
