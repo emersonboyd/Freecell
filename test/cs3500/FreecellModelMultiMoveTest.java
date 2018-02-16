@@ -13,7 +13,9 @@ import static org.junit.Assert.fail;
 public class FreecellModelMultiMoveTest {
   FreecellModelMultiMove model1;
 
-  // set up the two models as new FreecellModel instances
+  /**
+   * Setup the two models as new FreecellModel instances.
+   */
   @Before
   public void setup() {
     model1 = new FreecellModelMultiMove();
@@ -21,7 +23,10 @@ public class FreecellModelMultiMoveTest {
     setupPiles1();
   }
 
-  // setup piles of cards in model1 to be used for testing
+
+  /**
+   * Setup piles of cards in model1 to be used for testing.
+   */
   private void setupPiles1() {
     model1.startGame(model1.getDeck(), 8, 4, false);
 
@@ -516,31 +521,31 @@ public class FreecellModelMultiMoveTest {
   }
 
   /**
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
-   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE.
    */
 
   // Test moving a build with a sourcePile that is an invalid build -- illegal
@@ -550,7 +555,8 @@ public class FreecellModelMultiMoveTest {
       model1.move(PileType.CASCADE, 1, 5, PileType.CASCADE, 2);
       fail();
     } catch (IllegalArgumentException e) {
-      assertEquals(FreecellModelMultiMove.ERROR_CANNOT_CREATE_VALID_BUILD_FROM_SOURCE, e.getMessage());
+      assertEquals(FreecellModelMultiMove.ERROR_CANNOT_CREATE_VALID_BUILD_FROM_SOURCE,
+              e.getMessage());
     }
   }
 
@@ -584,7 +590,8 @@ public class FreecellModelMultiMoveTest {
       model1.move(PileType.CASCADE, 1, 6, PileType.FOUNDATION, 0);
       fail();
     } catch (IllegalArgumentException e) {
-      assertEquals(FreecellModelMultiMove.ERROR_MOVE_MULTIPLE_CARDS_TO_FOUNDATION_PILE, e.getMessage());
+      assertEquals(FreecellModelMultiMove.ERROR_MOVE_MULTIPLE_CARDS_TO_FOUNDATION_PILE,
+              e.getMessage());
     }
   }
 
@@ -731,7 +738,4 @@ public class FreecellModelMultiMoveTest {
 
     assertEquals(expected, model1.getGameState());
   }
-
-  // possible failure is if the same move to the same location fails
-  // possible failure is if the calculation for number of movable cards is wrong
 }

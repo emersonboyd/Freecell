@@ -28,9 +28,8 @@ public class Hw04TypeChecks {
   static void checkSignatures() {
     Reader stringReader;
     StringBuffer out;
-    FreecellOperations<?> model = FreecellModelCreator.create
-            (FreecellModelCreator.GameType
-            .MULTIMOVE);
+    FreecellOperations<?> model = FreecellModelCreator.create(
+            FreecellModelCreator.GameType.MULTIMOVE);
 
     checkNewModel(
             FreecellModelCreator.create(FreecellModelCreator.GameType
@@ -58,10 +57,9 @@ public class Hw04TypeChecks {
     String input = "4 3";
 
     try {
-        controller.playGame(deck, model, 7, 4, false);
-    }
-    catch (IOException e) {
-        
+      controller.playGame(deck, model, 7, 4, false);
+    } catch (IOException e) {
+      // No need to do anything with type checks
     }
   }
 

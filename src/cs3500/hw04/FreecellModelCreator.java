@@ -5,17 +5,17 @@ import cs3500.hw02.FreecellOperations;
 import cs3500.hw02.model.Card;
 
 /**
- * Represents a factory class to return various implementations of the FreecellOperations<Card>
+ * Represents a factory class to produce various implementations of the FreecellOperations
  * interface.
  */
 public class FreecellModelCreator {
   public static final String ERROR_ILLEGAL_GAMETYPE = "Inputted game type is not a valid GameType";
 
   /**
-   * Produces a specific implementation of FreecellOperations<Card> based on what the user requests.
+   * Produces a specific implementation of FreecellOperations based on what the user requests.
    *
-   * @param type the type of FreecellOperations<Card> to create
-   * @return the FreecellOperations<Card> specified by the GameType
+   * @param type the type of FreecellOperations to create
+   * @return the FreecellOperations specified by the GameType
    * @throws IllegalArgumentException if an invalid GameType is passed to the method
    */
   public static FreecellOperations<Card> create(GameType type) throws IllegalArgumentException {
