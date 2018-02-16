@@ -1,10 +1,12 @@
-package cs3500.hw04;
+package cs3500;
 
 import org.junit.Test;
 
 import cs3500.hw02.FreecellModel;
 import cs3500.hw02.FreecellOperations;
 import cs3500.hw02.model.Card;
+import cs3500.hw04.FreecellModelCreator;
+import cs3500.hw04.FreecellModelMultiMove;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

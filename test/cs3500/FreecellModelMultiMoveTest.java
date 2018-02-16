@@ -1,10 +1,11 @@
-package cs3500.hw04;
+package cs3500;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import cs3500.hw02.FreecellModel;
 import cs3500.hw02.PileType;
+import cs3500.hw04.FreecellModelMultiMove;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -22,15 +23,6 @@ public class FreecellModelMultiMoveTest {
 
   // setup piles of cards in model1 to be used for testing
   private void setupPiles1() {
-//    List<Card> deck = Arrays.asList(new Card(Suit.SPADES, Value.ACE),
-//            new Card(Suit.CLUBS, Value.THREE),
-//            new Card(Suit.HEARTS, Value.QUEEN),
-//            new Card(Suit.DIAMONDS, Value.EIGHT),
-//            new Card(Suit.HEARTS, Value.JACK),
-//            new Card(Suit.DIAMONDS, Value.KING),
-//            new Card(Suit.SPADES, Value.QUEEN),
-//            new Card(Suit.SPADES, Value.ACE),)
-
     model1.startGame(model1.getDeck(), 8, 4, false);
 
     // Sets up piles like this:
@@ -50,24 +42,6 @@ public class FreecellModelMultiMoveTest {
     //    C6: 6♠, A♠, 9♠, 4♠, Q♠, 7♠
     //    C7: 7♥, 2♥, 10♥, 5♥, K♥, 8♥
     //    C8: 8♣, 3♣, J♣, 6♣, A♣, 9♣
-
-    // Sets up piles like this:
-    //    "F1: A♠\n" +
-    //    "F2: A♣, 2♣\n" +
-    //    "F3: A♥, 2♥\n" +
-    //    "F4:\n" +
-    //    "O1:\n" +
-    //    "O2: 3♣\n" +
-    //    "O3: Q♥\n" +
-    //    "O4: 8♦\n" +
-    //    "C1: J♥\n" +
-    //    "C2: K♦, Q♣, J♦, 10♣, 9♥, 8♠, 7♦, 6♣, 5♥, 4♠, 3♥\n" +
-    //    "C3: Q♠\n" +
-    //    "C4: 10♠, 9♠\n" +
-    //    "C5: 6♠\n" +
-    //    "C6:\n" +
-    //    "C7:\n" +
-    //    "C8: 7♣");
   }
 
   // Test that an invalid move does not change any of the piles
@@ -88,7 +62,8 @@ public class FreecellModelMultiMoveTest {
             "C5: 5♦, K♦, 8♦, 3♦, J♦, 6♦\n" +
             "C6: 6♠, A♠, 9♠, 4♠, Q♠, 7♠\n" +
             "C7: 7♥, 2♥, 10♥, 5♥, K♥, 8♥\n" +
-            "C8: 8♣, 3♣, J♣, 6♣, A♣, 9♣";try {
+            "C8: 8♣, 3♣, J♣, 6♣, A♣, 9♣";
+    try {
       model1.move(PileType.OPEN, 3, 0, PileType.CASCADE, 1);
       fail();
     } catch (IllegalArgumentException e) {
@@ -99,7 +74,8 @@ public class FreecellModelMultiMoveTest {
   // Test moving cards before the game has started -- illegal
   @Test
   public void testMoveBeforeGameStart() {
-    model1 = new FreecellModelMultiMove();try {
+    model1 = new FreecellModelMultiMove();
+    try {
       model1.move(PileType.FOUNDATION, 4, 6, PileType.OPEN, 4);
       fail();
     } catch (IllegalStateException e) {
@@ -116,32 +92,6 @@ public class FreecellModelMultiMoveTest {
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals(FreecellModel.ERROR_OPEN_PILE_ALREADY_FILLED, e.getMessage());
-    }
-  }
-
-  // Test moving a card to a cascade pile that is the wrong color -- illegal
-  @Test
-  public void testMoveToCascadeWrongColor() {
-    try {
-      model1.move(PileType.CASCADE, 0, 6, PileType.OPEN, 0);
-      model1.move(PileType.CASCADE, 0, 5, PileType.OPEN, 1);
-      model1.move(PileType.CASCADE, 0, 4, PileType.CASCADE, 6);
-      fail();
-    } catch (IllegalArgumentException e) {
-      assertEquals(FreecellModelMultiMove.ERROR_CANNOT_INSERT_BUILD_TO_DESTINATION_CASCADE,
-              e.getMessage());
-    }
-  }
-
-  // Test moving a card to a cascade pile that is the wrong card value -- illegal
-  @Test
-  public void testMoveToCascadeWrongValue() {
-    try {
-      model1.move(PileType.CASCADE, 1, 6, PileType.CASCADE, 0);
-      fail();
-    } catch (IllegalArgumentException e) {
-      assertEquals(FreecellModelMultiMove.ERROR_CANNOT_INSERT_BUILD_TO_DESTINATION_CASCADE,
-              e.getMessage());
     }
   }
 
@@ -173,7 +123,7 @@ public class FreecellModelMultiMoveTest {
   // Test moving a non-ace card to an open foundation pile -- illegal
   @Test
   public void testMoveToFoundationDuplicateSuit() {
-try {
+    try {
       model1.move(PileType.CASCADE, 7, 5, PileType.OPEN, 0);
       model1.move(PileType.CASCADE, 7, 4, PileType.FOUNDATION, 0);
       model1.move(PileType.CASCADE, 3, 6, PileType.OPEN, 1);
@@ -189,7 +139,7 @@ try {
   // Test moving a card from a foundation pile after it's been placed -- illegal
   @Test
   public void testMoveFromFoundationPile() {
-try {
+    try {
       model1.move(PileType.CASCADE, 7, 5, PileType.OPEN, 3);
       model1.move(PileType.CASCADE, 7, 4, PileType.FOUNDATION, 0);
       model1.move(PileType.FOUNDATION, 0, 0, PileType.FOUNDATION, 5);
@@ -202,7 +152,7 @@ try {
   // Test moving from a cascade pile where the pileNumber is out of bounds too high -- illegal
   @Test
   public void testMoveFromCascadePileNumberTooHigh() {
-try {
+    try {
       model1.move(PileType.CASCADE, 8, 0, PileType.OPEN, 0);
       fail();
     } catch (IllegalArgumentException e) {
@@ -213,7 +163,7 @@ try {
   // Test moving from a cascade pile where the pileNumber is out of bounds too low (<0) -- illegal
   @Test
   public void testMoveFromCascadePileNumberTooLow() {
-try {
+    try {
       model1.move(PileType.CASCADE, -1, 0, PileType.OPEN, 0);
       fail();
     } catch (IllegalArgumentException e) {
@@ -224,7 +174,7 @@ try {
   // Test moving from a cascade pile where the cardIndex is out of bounds too high -- illegal
   @Test
   public void testMoveFromCascadeCardIndexTooHigh() {
-try {
+    try {
       model1.move(PileType.CASCADE, 1, 7, PileType.OPEN, 0);
       fail();
     } catch (IllegalArgumentException e) {
@@ -235,7 +185,7 @@ try {
   // Test moving from a cascade pile where the cardIndex is out of bounds too low (<0) -- illegal
   @Test
   public void testMoveFromCascadeCardIndexTooLow() {
-try {
+    try {
       model1.move(PileType.CASCADE, 1, -1, PileType.OPEN, 0);
       fail();
     } catch (IllegalArgumentException e) {
@@ -246,7 +196,7 @@ try {
   // Test moving from an open pile where the pileNumber is out of bounds too high -- illegal
   @Test
   public void testMoveFromOpenPileNumberTooHigh() {
-try {
+    try {
       model1.move(PileType.OPEN, 4, 0, PileType.OPEN, 0);
       fail();
     } catch (IllegalArgumentException e) {
@@ -257,7 +207,7 @@ try {
   // Test moving from an open pile where the pileNumber is out of bounds too low (<0) -- illegal
   @Test
   public void testMoveFromOpenPileNumberTooLow() {
-try {
+    try {
       model1.move(PileType.OPEN, -1, 0, PileType.OPEN, 0);
       fail();
     } catch (IllegalArgumentException e) {
@@ -268,7 +218,7 @@ try {
   // Test moving from an open pile where the cardIndex is out of bounds too high -- illegal
   @Test
   public void testMoveFromOpenCardIndexTooHigh() {
-try {
+    try {
       model1.move(PileType.CASCADE, 7, 5, PileType.OPEN, 3);
       model1.move(PileType.OPEN, 3, 1, PileType.OPEN, 0);
       fail();
@@ -280,7 +230,7 @@ try {
   // Test moving from an open pile where the cardIndex is out of bounds too low -- illegal
   @Test
   public void testMoveFromOpenCardIndexTooLow() {
-try {
+    try {
       model1.move(PileType.OPEN, 3, -1, PileType.OPEN, 0);
       fail();
     } catch (IllegalArgumentException e) {
@@ -291,7 +241,7 @@ try {
   // Test moving to a cascade pile where the destPileNumber is out of bounds too high -- illegal
   @Test
   public void testMoveToCascadePileNumberTooHigh() {
-try {
+    try {
       model1.move(PileType.CASCADE, 7, 5, PileType.CASCADE, 8);
       fail();
     } catch (IllegalArgumentException e) {
@@ -302,7 +252,7 @@ try {
   // Test moving to a cascade pile where the destPileNumber is out of bounds too low (<0) -- illegal
   @Test
   public void testMoveToCascadePileNumberTooLow() {
-try {
+    try {
       model1.move(PileType.CASCADE, 7, 5, PileType.CASCADE, -1);
       fail();
     } catch (IllegalArgumentException e) {
@@ -313,7 +263,7 @@ try {
   // Test moving to an open pile where the destPileNumber is out of bounds too high -- illegal
   @Test
   public void testMoveToOpenPileNumberTooHigh() {
-try {
+    try {
       model1.move(PileType.CASCADE, 7, 5, PileType.OPEN, 4);
       fail();
     } catch (IllegalArgumentException e) {
@@ -324,7 +274,7 @@ try {
   // Test moving to an open pile where the destPileNumber is out of bounds too low (<0) -- illegal
   @Test
   public void testMoveToOpenPileNumberTooLow() {
-try {
+    try {
       model1.move(PileType.CASCADE, 7, 5, PileType.OPEN, -1);
       fail();
     } catch (IllegalArgumentException e) {
@@ -335,7 +285,7 @@ try {
   // Test moving to a foundation pile where the destPileNumber is out of bounds too high -- illegal
   @Test
   public void testMoveToFoundationPileNumberTooHigh() {
-try {
+    try {
       model1.move(PileType.CASCADE, 7, 5, PileType.OPEN, 0);
       model1.move(PileType.CASCADE, 7, 4, PileType.FOUNDATION, 4);
       fail();
@@ -347,7 +297,7 @@ try {
   // Test moving to a foundation pile where the destPileNumber is out of bounds too low -- illegal
   @Test
   public void testMoveToFoundationPileNumberTooLow() {
-try {
+    try {
       model1.move(PileType.CASCADE, 1, 6, PileType.FOUNDATION, -1);
       fail();
     } catch (IllegalArgumentException e) {
@@ -540,7 +490,7 @@ try {
     assertEquals(expected, model1.getGameState());
   }
 
-  // Test moving a card from the same spot to the same spot -- legal???
+  // Test moving a card from the same spot to the same spot -- legal
   @Test
   public void testMoveFromSameSpotToSameSpot() {
     String expected = "F1:\n" +
@@ -565,22 +515,222 @@ try {
     assertEquals(expected, model1.getGameState());
   }
 
+  /**
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   * BEGIN TESTS SPECIFIC FOR THE MULTI MOVE
+   */
 
-  // testMove with a cardIndex greater than the cascade pile size -- illegal
-  // testMove with a cardIndex smaller than 0 -- illegal
-  // testMove with a sourcePile that is an invalid build -- illegal
-  // testMove with a destination cascade pile that doesn't accept the build suit -- illegal
-  // testMove with a destination cascade pile that doesn't accept the build value -- illegal
-  // testMove with a destination open pile that doesn't accept more than one card -- illegal
-  // testMove with a destination foundation pile that doesn't accept more than one card -- illegal
-  // testMove with multiple valid cards move to a filled cascade pile -- legal
-  // testMove with multiple valid cards move to an empty cascade pile -- legal
-  // testMove with a single card to a foundation pile -- legal
-  // testMove with a single card to an open pile -- legal
-  // testMove with a single card to a cascade pile -- legal
-  // testMove with all of the valid tests remaining from previous tests -- legal
-  // testMove with too few available open/cascade piles (by 1 too few) -- illegal
-  // testMove with any sections that i got points off of on the self eval from hw02
+  // Test moving a build with a sourcePile that is an invalid build -- illegal
+  @Test
+  public void testMoveBuildFromSourceWithInvalidBuild() {
+    try {
+      model1.move(PileType.CASCADE, 1, 5, PileType.CASCADE, 2);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals(FreecellModelMultiMove.ERROR_CANNOT_CREATE_VALID_BUILD_FROM_SOURCE, e.getMessage());
+    }
+  }
+
+  // Test moving a build with too few empty open/cascade piles (by 1 too few) -- illegal
+  @Test
+  public void testMoveBuildNotEnoughEmptyPiles() {
+    try {
+      model1.move(PileType.CASCADE, 6, 5, PileType.CASCADE, 7);
+      model1.move(PileType.CASCADE, 5, 5, PileType.CASCADE, 7);
+      model1.move(PileType.CASCADE, 4, 5, PileType.CASCADE, 7);
+      model1.move(PileType.CASCADE, 4, 4, PileType.CASCADE, 5);
+      model1.move(PileType.CASCADE, 5, 4, PileType.CASCADE, 6);
+      model1.move(PileType.CASCADE, 5, 3, PileType.OPEN, 0);
+      model1.move(PileType.CASCADE, 5, 2, PileType.OPEN, 1);
+      model1.move(PileType.CASCADE, 0, 6, PileType.CASCADE, 1);
+      model1.move(PileType.CASCADE, 5, 1, PileType.CASCADE, 0);
+      model1.move(PileType.CASCADE, 5, 0, PileType.OPEN, 2);
+      model1.move(PileType.CASCADE, 7, 5, PileType.CASCADE, 1);
+      model1.move(PileType.CASCADE, 1, 7, PileType.CASCADE, 5);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals(FreecellModelMultiMove.ERROR_NOT_ENOUGH_EMPTY_PILES, e.getMessage());
+    }
+  }
+
+  // Test moving a build to a foundation pile that doesn't accept more than one card -- illegal
+  @Test
+  public void testMoveBuildToFoundationPile() {
+    try {
+      model1.move(PileType.CASCADE, 0, 6, PileType.CASCADE, 1);
+      model1.move(PileType.CASCADE, 1, 6, PileType.FOUNDATION, 0);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals(FreecellModelMultiMove.ERROR_MOVE_MULTIPLE_CARDS_TO_FOUNDATION_PILE, e.getMessage());
+    }
+  }
+
+  // Test moving a build to an open pile that doesn't accept more than one card -- illegal
+  @Test
+  public void testMoveBuildToOpenPile() {
+    try {
+      model1.move(PileType.CASCADE, 0, 6, PileType.CASCADE, 1);
+      model1.move(PileType.CASCADE, 1, 6, PileType.OPEN, 0);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals(FreecellModelMultiMove.ERROR_MOVE_MULTIPLE_CARDS_TO_OPEN_PILE, e.getMessage());
+    }
+  }
+
+  // Test moving a build to a cascade pile that is the wrong color -- illegal
+  @Test
+  public void testMoveToBuildCascadeWrongColor() {
+    try {
+      model1.move(PileType.CASCADE, 0, 6, PileType.OPEN, 0);
+      model1.move(PileType.CASCADE, 0, 5, PileType.OPEN, 1);
+      model1.move(PileType.CASCADE, 0, 4, PileType.CASCADE, 6);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals(FreecellModelMultiMove.ERROR_CANNOT_INSERT_BUILD_TO_DESTINATION_CASCADE,
+              e.getMessage());
+    }
+  }
+
+  // Test moving a build to a cascade pile that is the wrong card value -- illegal
+  @Test
+  public void testMoveBuildToCascadeWrongValue() {
+    try {
+      model1.move(PileType.CASCADE, 1, 6, PileType.CASCADE, 0);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertEquals(FreecellModelMultiMove.ERROR_CANNOT_INSERT_BUILD_TO_DESTINATION_CASCADE,
+              e.getMessage());
+    }
+  }
+
+  // Test moving a build with multiple valid cards move to a filled cascade pile -- legal
+  @Test
+  public void testMoveBuildToCascadePileFilled() {
+    String expected = "F1:\n" +
+            "F2:\n" +
+            "F3:\n" +
+            "F4:\n" +
+            "O1: 4♠\n" +
+            "O2: 9♠\n" +
+            "O3: 6♠\n" +
+            "O4:\n" +
+            "C1: A♦, 9♦, 4♦, Q♦, 7♦, 2♦, A♠\n" +
+            "C2: 2♠, 10♠, 5♠, K♠, 8♠, 3♠, J♠, 10♦, 9♣, 8♥, 7♠, 6♦\n" +
+            "C3: 3♥, J♥, 6♥, A♥, 9♥, 4♥, Q♥\n" +
+            "C4: 4♣, Q♣, 7♣, 2♣, 10♣, 5♣, K♣\n" +
+            "C5: 5♦, K♦, 8♦, 3♦\n" +
+            "C6:\n" +
+            "C7: 7♥, 2♥, 10♥, 5♥, K♥, Q♠, J♦\n" +
+            "C8: 8♣, 3♣, J♣, 6♣, A♣";
+
+    model1.move(PileType.CASCADE, 6, 5, PileType.CASCADE, 7);
+    model1.move(PileType.CASCADE, 5, 5, PileType.CASCADE, 7);
+    model1.move(PileType.CASCADE, 4, 5, PileType.CASCADE, 7);
+    model1.move(PileType.CASCADE, 4, 4, PileType.CASCADE, 5);
+    model1.move(PileType.CASCADE, 5, 4, PileType.CASCADE, 6);
+    model1.move(PileType.CASCADE, 5, 3, PileType.OPEN, 0);
+    model1.move(PileType.CASCADE, 5, 2, PileType.OPEN, 1);
+    model1.move(PileType.CASCADE, 0, 6, PileType.CASCADE, 1);
+    model1.move(PileType.CASCADE, 5, 1, PileType.CASCADE, 0);
+    model1.move(PileType.CASCADE, 5, 0, PileType.OPEN, 2);
+    model1.move(PileType.CASCADE, 7, 5, PileType.CASCADE, 1);
+
+    assertEquals(expected, model1.getGameState());
+  }
+
+  // Test moving a build with multiple valid cards move to an empty cascade pile -- legal
+  @Test
+  public void testMoveBuildToCascadePileEmpty() {
+    String expected = "F1:\n" +
+            "F2:\n" +
+            "F3:\n" +
+            "F4:\n" +
+            "O1: 4♠\n" +
+            "O2: 9♠\n" +
+            "O3: 6♠\n" +
+            "O4:\n" +
+            "C1: A♦, 9♦, 4♦, Q♦, 7♦, 2♦, A♠\n" +
+            "C2: 2♠, 10♠, 5♠, K♠, 8♠, 3♠, J♠, 10♦\n" +
+            "C3: 3♥, J♥, 6♥, A♥, 9♥, 4♥, Q♥\n" +
+            "C4: 4♣, Q♣, 7♣, 2♣, 10♣, 5♣, K♣\n" +
+            "C5: 5♦, K♦, 8♦, 3♦\n" +
+            "C6: 9♣, 8♥, 7♠, 6♦\n" +
+            "C7: 7♥, 2♥, 10♥, 5♥, K♥, Q♠, J♦\n" +
+            "C8: 8♣, 3♣, J♣, 6♣, A♣";
+
+    model1.move(PileType.CASCADE, 6, 5, PileType.CASCADE, 7);
+    model1.move(PileType.CASCADE, 5, 5, PileType.CASCADE, 7);
+    model1.move(PileType.CASCADE, 4, 5, PileType.CASCADE, 7);
+    model1.move(PileType.CASCADE, 4, 4, PileType.CASCADE, 5);
+    model1.move(PileType.CASCADE, 5, 4, PileType.CASCADE, 6);
+    model1.move(PileType.CASCADE, 5, 3, PileType.OPEN, 0);
+    model1.move(PileType.CASCADE, 5, 2, PileType.OPEN, 1);
+    model1.move(PileType.CASCADE, 0, 6, PileType.CASCADE, 1);
+    model1.move(PileType.CASCADE, 5, 1, PileType.CASCADE, 0);
+    model1.move(PileType.CASCADE, 5, 0, PileType.OPEN, 2);
+    model1.move(PileType.CASCADE, 7, 5, PileType.CASCADE, 5);
+
+    assertEquals(expected, model1.getGameState());
+  }
+
+  // Test moving a build from the same spot to the same spot without enough empty piles -- legal
+  @Test
+  public void testMoveBuildFromSameSpotToSameSpotNotEnoughEmptyPiles() {
+    String expected = "F1:\n" +
+            "F2:\n" +
+            "F3:\n" +
+            "F4:\n" +
+            "O1: 4♠\n" +
+            "O2: 9♠\n" +
+            "O3: 6♠\n" +
+            "O4:\n" +
+            "C1: A♦, 9♦, 4♦, Q♦, 7♦, 2♦, A♠\n" +
+            "C2: 2♠, 10♠, 5♠, K♠, 8♠, 3♠, J♠, 10♦, 9♣, 8♥, 7♠, 6♦\n" +
+            "C3: 3♥, J♥, 6♥, A♥, 9♥, 4♥, Q♥\n" +
+            "C4: 4♣, Q♣, 7♣, 2♣, 10♣, 5♣, K♣\n" +
+            "C5: 5♦, K♦, 8♦, 3♦\n" +
+            "C6:\n" +
+            "C7: 7♥, 2♥, 10♥, 5♥, K♥, Q♠, J♦\n" +
+            "C8: 8♣, 3♣, J♣, 6♣, A♣";
+
+    model1.move(PileType.CASCADE, 6, 5, PileType.CASCADE, 7);
+    model1.move(PileType.CASCADE, 5, 5, PileType.CASCADE, 7);
+    model1.move(PileType.CASCADE, 4, 5, PileType.CASCADE, 7);
+    model1.move(PileType.CASCADE, 4, 4, PileType.CASCADE, 5);
+    model1.move(PileType.CASCADE, 5, 4, PileType.CASCADE, 6);
+    model1.move(PileType.CASCADE, 5, 3, PileType.OPEN, 0);
+    model1.move(PileType.CASCADE, 5, 2, PileType.OPEN, 1);
+    model1.move(PileType.CASCADE, 0, 6, PileType.CASCADE, 1);
+    model1.move(PileType.CASCADE, 5, 1, PileType.CASCADE, 0);
+    model1.move(PileType.CASCADE, 5, 0, PileType.OPEN, 2);
+    model1.move(PileType.CASCADE, 7, 5, PileType.CASCADE, 1);
+    model1.move(PileType.CASCADE, 1, 6, PileType.CASCADE, 1);
+
+    assertEquals(expected, model1.getGameState());
+  }
 
   // possible failure is if the same move to the same location fails
   // possible failure is if the calculation for number of movable cards is wrong

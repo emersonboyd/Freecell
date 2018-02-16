@@ -17,7 +17,7 @@ public class FreecellModelMultiMove extends FreecellModel {
   public static final String ERROR_NOT_ENOUGH_EMPTY_PILES =
           "There are not enough empty piles to temporarily hold cards for this move";
   public static final String ERROR_MOVE_MULTIPLE_CARDS_TO_FOUNDATION_PILE =
-          "Cannot move multiple cards to a foudnation pile.";
+          "Cannot move multiple cards to a foundation pile.";
   public static final String ERROR_MOVE_MULTIPLE_CARDS_TO_OPEN_PILE =
           "Cannot move multiple cards to an open pile.";
   public static final String ERROR_CANNOT_INSERT_BUILD_TO_DESTINATION_CASCADE =
@@ -80,11 +80,6 @@ public class FreecellModelMultiMove extends FreecellModel {
       default:
         // do nothing because all source cases should be handled above
         break;
-    }
-
-    // check if the given cardIndex is valid
-    if (cardIndex + 1 != sourcePile.size()) {
-      throw new IllegalArgumentException(ERROR_CARD_INDEX_OUT_OF_BOUNDS);
     }
 
     List<Card> sourceBuild = sourcePile.subList(cardIndex, sourcePile.size());

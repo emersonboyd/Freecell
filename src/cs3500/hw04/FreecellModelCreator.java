@@ -27,7 +27,7 @@ public class FreecellModelCreator {
       return new FreecellModelMultiMove();
     }
 
-    throw  new IllegalArgumentException(ERROR_ILLEGAL_GAMETYPE);
+    throw new IllegalArgumentException(ERROR_ILLEGAL_GAMETYPE);
   }
 
   public enum GameType {
